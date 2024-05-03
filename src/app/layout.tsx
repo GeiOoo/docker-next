@@ -21,9 +21,9 @@ export default function RootLayout({
             <body className={inter.className}>
                 <BaseThemeComponent>
                     <Stack spacing={2} direction={'row'}>
-                        <LinkButton href="/">Customer</LinkButton>
-                        <LinkButton href="/service">Service</LinkButton>
-                        <LinkButton href="/manager">Manager</LinkButton>
+                        <LinkButton href="/" variant='contained'>Customer</LinkButton>
+                        <LinkButton href="/service" variant='contained'>Service</LinkButton>
+                        <LinkButton href="/manager" variant='contained'>Manager</LinkButton>
                     </Stack>
                     {children}
                 </BaseThemeComponent>
