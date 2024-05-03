@@ -1,5 +1,7 @@
+import { Stack } from '@mui/material';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { LinkButton } from '../shared/components/LinkButton';
 import { BaseThemeComponent } from './BaseThemeComponent';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,6 +20,11 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <BaseThemeComponent>
+                    <Stack spacing={2} direction={'row'}>
+                        <LinkButton href="/">Customer</LinkButton>
+                        <LinkButton href="/service">Service</LinkButton>
+                        <LinkButton href="/manager">Manager</LinkButton>
+                    </Stack>
                     {children}
                 </BaseThemeComponent>
             </body>
