@@ -1,7 +1,7 @@
-import Customer from './_customer/page';
+import { Typography } from '@mui/material';
 
 export default function Home() {
     return (
-        <Customer />
+        <Typography>Home</Typography>
     );
 }

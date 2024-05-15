@@ -1,3 +1,4 @@
+import { Stack } from '@mui/material';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { BaseThemeComponent } from './BaseThemeComponent';
@@ -18,7 +19,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <BaseThemeComponent>
-                    {children}
+                    <Stack height={'100%'} justifyContent={'center'} alignItems={'center'}>
+                        {children}
+                    </Stack>
                 </BaseThemeComponent>
             </body>
         </html>

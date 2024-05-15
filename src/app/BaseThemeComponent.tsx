@@ -1,7 +1,7 @@
 'use client';
 
 import { ThemeProvider } from '@emotion/react';
-import { CssBaseline, createTheme } from '@mui/material';
+import { Box, CssBaseline, createTheme } from '@mui/material';
 
 const darkTheme = createTheme({
     palette: {
@@ -13,7 +13,9 @@ export function BaseThemeComponent({ children }: Readonly<{ children: React.Reac
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            {children}
+            <Box height={'100vh'}>
+                {children}
+            </Box>
         </ThemeProvider>
     );
 }
