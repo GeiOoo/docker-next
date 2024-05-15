@@ -4,6 +4,8 @@ import { getServerSession } from 'next-auth';
 import { Inter } from "next/font/google";
 import { BaseThemeComponent } from './BaseThemeComponent';
 import Header from './_Header/Header';
+import NavContextProvider from './_Nav/NavContextProvider';
+import Sidenav from './_Nav/Sidenav';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +26,19 @@ export default async function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <BaseThemeComponent>
-                    <Stack height={'100%'}>
-                        {!!session &&
-                            <Header />
-                        }
-                        {children}
-                    </Stack>
+                    <NavContextProvider>
+                        <Stack height={'100%'}>
+                            {!!session &&
+                                <Header />
+                            }
+                            <Stack flex={1} direction={'row'} alignItems={'stretch'}>
+                                <Sidenav />
+                                <Stack flex={1}>
+                                    {children}
+                                </Stack>
+                            </Stack>
+                        </Stack>
+                    </NavContextProvider>
                 </BaseThemeComponent>
             </body>
         </html>
