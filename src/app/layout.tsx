@@ -1,10 +1,9 @@
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import type { Metadata } from "next";
 import { getServerSession } from 'next-auth';
 import { Inter } from "next/font/google";
 import { BaseThemeComponent } from './BaseThemeComponent';
 import Header from './_Header/Header';
-import LoginForm from './_Login/LoginForm';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,20 +24,12 @@ export default async function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <BaseThemeComponent>
-                    {!!session ?
-                        <>
-                            <Stack height={'100%'}>
-                                <Header />
-                                <Box padding={1}>
-                                    {children}
-                                </Box>
-                            </Stack>
-                        </>
-                        :
-                        <Stack height={'100%'} justifyContent={'center'} alignItems={'center'}>
-                            <LoginForm />
-                        </Stack>
-                    }
+                    <Stack height={'100%'}>
+                        {!!session &&
+                            <Header />
+                        }
+                        {children}
+                    </Stack>
                 </BaseThemeComponent>
             </body>
         </html>
