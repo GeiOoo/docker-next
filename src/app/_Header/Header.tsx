@@ -3,7 +3,7 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { usePathname } from 'next/navigation';
-import AuthButton from './AuthButton';
+import UserButton from './UserButton';
 
 function Header() {
     const pathname = usePathname();
@@ -24,7 +24,7 @@ function Header() {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{pageName}</Typography>
-                <AuthButton />
+                <UserButton />
             </Toolbar>
         </AppBar>
     );
