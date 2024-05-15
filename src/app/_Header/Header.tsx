@@ -1,15 +1,11 @@
-'use client';
-
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
-import { usePathname } from 'next/navigation';
+import { AppBar, CircularProgress, IconButton, Toolbar, Typography } from '@mui/material';
+import { getServerSession } from 'next-auth';
+import { Suspense } from 'react';
 import UserButton from './UserButton';
 
-function Header() {
-    const pathname = usePathname();
-    const page = pathname.split('/')[0];
-    const pageName = page !== '' ? page : 'Home';
-
+async function Header() {
+    const session = await getServerSession();
 
     return (
         <AppBar position="static">
@@ -23,8 +19,10 @@ function Header() {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{pageName}</Typography>
-                <UserButton />
+                <Typography flex={1} variant="h6" component="div">Home</Typography>
+                <Suspense fallback={<CircularProgress />}>
+                    <UserButton session={session} />
+                </Suspense>
             </Toolbar>
         </AppBar>
     );

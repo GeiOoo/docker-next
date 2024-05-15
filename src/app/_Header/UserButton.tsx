@@ -1,19 +1,21 @@
 'use client';
 
-import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
-import { signOut } from 'next-auth/react';
+import { Avatar, IconButton, Typography } from '@mui/material';
+import { Session } from 'next-auth';
 import { useState } from 'react';
+import UserDrawer from './UserDrawer';
 
-function UserButton() {
-    const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
+function UserButton({ session }: {
+    session: Session | null;
+}) {
+    const [openSideMenu, setOpenSideMenu] = useState(false);
 
     return <>
-        <IconButton onClick={event => setAnchorElement(event.currentTarget)}>
+        <Typography variant="body1" sx={{ p: 2 }}>Account: {session?.user?.name}</Typography>
+        <IconButton onClick={() => setOpenSideMenu(true)} >
             <Avatar />
         </IconButton>
-        <Menu open={!!anchorElement} anchorEl={anchorElement} onClose={() => setAnchorElement(null)}>
-            <MenuItem onClick={() => signOut()}>Logout</MenuItem>
-        </Menu>
+        <UserDrawer open={openSideMenu} onClose={() => setOpenSideMenu(false)} />
     </>;
 }
 
