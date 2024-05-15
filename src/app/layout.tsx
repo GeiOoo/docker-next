@@ -32,7 +32,9 @@ export default async function RootLayout({
                                 <Header />
                             }
                             <Stack flex={1} direction={'row'} alignItems={'stretch'}>
-                                <Sidenav />
+                                {!!session &&
+                                    <Sidenav />
+                                }
                                 <Stack flex={1}>
                                     {children}
                                 </Stack>
