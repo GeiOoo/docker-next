@@ -1,0 +1,42 @@
+services:
+  proxy:
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  dev:
+    container_name: next-docker-dev
+    image: next-docker
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    environment:
+      - VIRTUAL_HOST=dev.localhost
+    ports:
+      - 3000
+    depends_on:
+      - proxy
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore: 
+            - node_modules
+        - action: rebuild
+          path: package.json
+  prod:
+    container_name: next-docker-prod
+    image: next-docker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - VIRTUAL_HOST=prod.localhost
+    ports:
+      - 3000
+    depends_on:
+      - proxy
